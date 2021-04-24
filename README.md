@@ -1,7 +1,7 @@
 # Learning Clojure
 
 ![Clojure for the Brave and True chapter progress](https://img.shields.io/badge/Clojure%20for%20the%20Brave%20and%20True-3%2F13-DBEAFE?logo=clojure&style=for-the-badge&labelColor=4B5563)
-![4Clojure problems progress](https://img.shields.io/badge/4Clojure-5%2F156-DBEAFE?logo=clojure&style=for-the-badge&labelColor=4B5563)
+![4Clojure problems progress](https://img.shields.io/badge/4Clojure-34%2F156-DBEAFE?logo=clojure&style=for-the-badge&labelColor=4B5563)
 ![Advent of Code progress](https://img.shields.io/badge/Advent%20of%20Code-0%2F9-D1D5DB?logo=codefactor&style=for-the-badge&labelColor=4B5563)
 ![Codewars](https://img.shields.io/badge/Codewars%20Clojure%20rank-7%20kyu-DBEAFE?logo=codewars&style=for-the-badge&labelColor=4B5563)
 
@@ -31,7 +31,7 @@
 | ------------------------------ | -------- |
 | John McCarthy's paper          | Reading  |
 | Clojure for The Brave and True | 3/13     |
-| 100 4Clojure problems          | 5/100    |
+| 100 4Clojure problems          | 34/100   |
 | Advent of Code tasks           | 0/9      |
 
 ### Details
