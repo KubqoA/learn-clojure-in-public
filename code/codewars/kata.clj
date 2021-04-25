@@ -2,7 +2,7 @@
   (:require [clojure.string :as str]
             [clojure.test :as test]))
 
-(test/run-all-tests)
+(test/run-tests)
 
 ;; Detect pangram
 ;; 6 kyu
