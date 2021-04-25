@@ -5,6 +5,7 @@
 ;; Write a function which returns the last element in a sequence.
 ;; Restricted: last
 (def f19 #(first (reverse %)))
+;; (def f19 (comp first reverse))
 (= (f19 [1 2 3 4 5]) 5)
 (= (f19 '(5 4 3)) 3)
 (= (f19 ["b" "c" "d"]) "d")
@@ -137,7 +138,7 @@
 ;; Write a function which flattens a sequence.
 ;; Restricted: flatten
 (def f28
-  (fn flatten' [[item & remaining]] 
+  (fn flatten' [[item & remaining]]
     (if (nil? item) nil
         (concat (if (coll? item) (flatten' item) (list item)) (flatten' remaining)))))
 
@@ -162,7 +163,7 @@
 (def f30
   (fn compress [[item & remaining]]
     (if (nil? remaining) (list item)
-      (if (= item (first remaining)) (compress remaining) (conj (compress remaining) item)))))
+        (if (= item (first remaining)) (compress remaining) (conj (compress remaining) item)))))
 
 (def f30'
   #(map first (partition-by identity %)))
@@ -229,3 +230,128 @@
 (= (f34 1 4) '(1 2 3))
 (= (f34' -2 2) '(-2 -1 0 1))
 (= (f34'' 5 8) '(5 6 7))
+
+;; No. 38
+;; Maximum Value
+;; Write a function which takes a variable number of parameters and returns
+;; the maximum value.
+;; Restricted: max, max-key
+(def f38
+  #(reduce (fn [maxValue value]
+             (if (> value maxValue) value maxValue)) %&))
+
+(= (f38 1 8 3 4) 8)
+(= (f38 30 20) 30)
+(= (f38 45 67 11) 67)
+
+;; No. 39
+;; Interleave Two Seqs
+;; Write a function which takes two sequences and returns the first item
+;; from each, then the second item from each, then the third, etc.
+;; Restricted: interleave
+(def f39
+  (fn interleave' [[one & coll1] [two & coll2]]
+    (if (some nil? (list one two)) nil (conj (interleave' coll1 coll2) two one))))
+
+(def f39'
+  #(mapcat (fn [& values] values) %1 %2))
+
+;; This is basically a fully working interleave
+(def f39''
+  (partial mapcat list))
+
+(= (f39'' [1 2 3] [:a :b :c]) '(1 :a 2 :b 3 :c))
+(= (f39' [1 2] [3 4 5 6]) '(1 3 2 4))
+(= (f39 [1 2 3 4] [5]) [1 5])
+(= (f39 [30 20] [25 15]) [30 25 20 15])
+
+;; No. 40
+;; Interpose a Seq
+;; Write a function which separates the items of a sequence
+;; by an arbitrary value.
+;; Restricted: interpose
+(def f40
+  #(drop-last (mapcat list %2 (repeat (count %2) %1))))
+
+(def f40'
+  (fn [sep coll] (drop-last (mapcat #(list % sep) coll))))
+
+(= (f40 0 [1 2 3]) [1 0 2 0 3])
+(= (apply str (f40 ", " ["one" "two" "three"])) "one, two, three")
+(= (f40' :z [:a :b :c :d]) [:a :z :b :z :c :z :d])
+
+;; No. 41
+;; Drop Every Nth Item
+;; Write a function which drops every Nth item from a sequence.
+(def f41
+  (fn [coll n] (keep-indexed #(when (not= 0 (rem (+ %1 1) n)) %2) coll)))
+
+(= (f41 [1 2 3 4 5 6 7 8] 3) [1 2 4 5 7 8])
+(= (f41 [:a :b :c :d :e :f] 2) [:a :c :e])
+(= (f41 [1 2 3 4 5 6] 4) [1 2 3 5 6])
+
+;; No. 42
+;; Factorial Fun
+;; Write a function which calculates factorials.
+(def f42
+  (fn factorial [n] (if (= n 0) 1 (* (factorial (- n 1)) n))))
+
+(def f42'
+  #(reduce * (range 1 (+ 1 %))))
+
+(= (f42' 1) 1)
+(= (f42' 3) 6)
+(= (f42 5) 120)
+(= (f42' 8) 40320)
+
+;; No. 45
+;; Intro to Iterate
+;; The iterate function can be used to produce an infinite lazy sequence.
+(def f45
+  '(1 4 7 10 13))
+
+(= f45 (take 5 (iterate #(+ 3 %) 1)))
+
+;; No. 47
+;; Contain Yourself
+;; The contains? function checks if a KEY is present in a given collection.
+;; This often leads beginner clojurians to use it incorrectly with numerically
+;; indexed collections like vectors and lists.
+(def f47
+  4)
+
+(contains? #{4 5 6} f47)
+(contains? [1 1 1 1 1] f47)
+(contains? {4 :a 2 :b} f47)
+(not (contains? [1 2 4] f47))
+
+;; No. 48
+;; Intro to some
+;; The some function takes a predicate function and a collection. It returns
+;; the first logical true value of (predicate x) where x is an item in the
+;; collection.
+(def f48
+  6)
+
+(= f48 (some #{2 7 6} [5 6 7 8]))
+(= f48 (some #(when (even? %) %) [5 6 7 8]))
+
+;; No. 49
+;; Split a sequence
+;; Write a function which will split a sequence into two parts.
+;; Restricted: split-at
+(def f49
+  ;;(fn [n coll] [(take n coll) (drop n coll)])
+  #(vector (take %1 %2) (drop %1 %2)))
+
+(= (f49 3 [1 2 3 4 5 6]) [[1 2 3] [4 5 6]])
+(= (f49 1 [:a :b :c :d]) [[:a] [:b :c :d]])
+(= (f49 2 [[1 2] [3 4] [5 6]]) [[[1 2] [3 4]] [[5 6]]])
+
+;; No. 51
+;; Advanced Destructuring
+;; Here is an example of some more sophisticated destructuring.
+(def f51
+  [1 2 3 4 5])
+
+(= [1 2 [3 4 5] [1 2 3 4 5]] (let [[a b & c :as d] f51] [a b c d]))

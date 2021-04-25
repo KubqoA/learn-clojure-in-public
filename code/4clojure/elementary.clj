@@ -122,3 +122,33 @@
 ;; (= __ (filter #(> % 5) '(3 4 5 6 7)))
 (= '(6 7) (filter #(> % 5) '(3 4 5 6 7)))
 
+;; No. 35
+;; Local bindings
+;; Clojure lets you give local names to values using the special let-form.
+;; (= __ (let [x 5] (+ 2 x)))
+;; (= __ (let [x 3, y 10] (- y x)))
+;; (= __ (let [x 21] (let [y 3] (/ x y))))
+(= 7 (let [x 5] (+ 2 x)))
+
+;; No. 36
+;; Let it Be
+;; Can you bind x, y, and z so that these are all true?
+;; (= 10 (let __ (+ x y)))
+;; (= 4 (let __ (+ y z)))
+;; (= 1 (let __ z))
+(= 10 (let [x 7 y 3 z 1] (+ x y)))
+(= 4 (let [x 7 y 3 z 1] (+ y z)))
+(= 1 (let [x 7 y 3 z 1] z))
+
+;; No. 37
+;; Regular Expressions
+;; Regex patterns are supported with a special reader macro.
+;; https://clojure.org/reference/other_functions#regex
+;; (= __ (apply str (re-seq #"[A-Z]+" "bA1B3Ce ")))
+(= "ABC" (apply str (re-seq #"[A-Z]+" "bA1B3Ce ")))
+
+;; No. 52
+;; Intro to Destructuring
+;; Let bindings and function parameter lists support destructuring.
+;; (= [2 4] (let [[a b c d e] [0 1 2 3 4]] __))
+(= [2 4] (let [[a b c d e] [0 1 2 3 4]] [c e]))
