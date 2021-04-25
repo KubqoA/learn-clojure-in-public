@@ -7,8 +7,9 @@
 
 ## Path
 
-### Theoretical background
+### Reading list
 - [ ] [John McCarthy's Recursive Functions of Symbolic Expressions Their Computation by Machine, Part I](resources/Recursive_Functions_of_Symbolic_Expressions_and_Their_Computation_by_Machine_Part_I.pdf)
+- [ ] [Rich Hickey's History of Clojure](resources/clojure-hopl-iv-final.pdf)
 
 ### Expectations
 - [ ] [Track progress](progress)
@@ -30,6 +31,7 @@
 | Goal                           | Progress |
 | ------------------------------ | -------- |
 | John McCarthy's paper          | Reading  |
+| History of Clojure             | -        |
 | Clojure for The Brave and True | 3/13     |
 | 100 4Clojure problems          | 34/100   |
 | Advent of Code tasks           | 0/9      |
