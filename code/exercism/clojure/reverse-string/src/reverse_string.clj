@@ -1,5 +1,5 @@
 (ns reverse-string)
 
-(defn reverse-string [s] ;; <- arglist goes here
-  ;; your code goes here
+(defn reverse-string [s]
+  (reduce #(str %2 %) "" s)
 )
