@@ -61,6 +61,37 @@
   #(vals (group-by type %)))
 
 (test/deftest f50-test
-    (test/is (= (set (f50 [1 :a 2 :b 3 :c])) #{[1 2 3] [:a :b :c]}))
-    (test/is (= (set (f50 [:a "foo"  "bar" :b])) #{[:a :b] ["foo" "bar"]}))
-    (test/is (= (set (f50 [[1 2] :a [3 4] 5 6 :b])) #{[[1 2] [3 4]] [:a :b] [5 6]})))
+  (test/is (= (set (f50 [1 :a 2 :b 3 :c])) #{[1 2 3] [:a :b :c]}))
+  (test/is (= (set (f50 [:a "foo"  "bar" :b])) #{[:a :b] ["foo" "bar"]}))
+  (test/is (= (set (f50 [[1 2] :a [3 4] 5 6 :b])) #{[[1 2] [3 4]] [:a :b] [5 6]})))
+
+;; No. 54
+;; Partition a Sequence
+;; Write a function which returns a sequence of lists of x items each. Lists
+;; of less than x items should not be returned.
+;; Restricted: partition, partition-all
+(def f54
+  (fn [n coll] (map #(take n (drop (* % n) coll)) (range (quot (count coll) n)))))
+
+(test/deftest f54-test
+  (test/is (= (f54 3 (range 9)) '((0 1 2) (3 4 5) (6 7 8))))
+  (test/is (= (f54 2 (range 8)) '((0 1) (2 3) (4 5) (6 7))))
+  (test/is (= (f54 3 (range 8)) '((0 1 2) (3 4 5)))))
+
+;; No. 55
+;; Count Occurrences
+;; Write a function which returns a map containing the number of occurences
+;; of each distinct item in a sequence.
+;; Restricted: frequencies
+(def f55
+  #(reduce (fn [freq item] (assoc freq item (+ (freq item 0) 1))) {} %))
+
+;; (def f55
+;;   (partial reduce #(assoc % %2 (+ 1 (% %2 0))) {}))
+
+;; solution is also: reduce #(assoc % %2 (+ 1 (% %2 0))) {}
+
+(test/deftest f55-test
+  (test/is (= (f55 [1 1 2 3 2 1 1]) {1 4, 2 2, 3 1}))
+  (test/is (= (f55 [:b :a :b :a :b]) {:a 2, :b 3}))
+  (test/is (= (f55 '([1 2] [1 3] [1 3])) {[1 2] 1, [1 3] 2})))
