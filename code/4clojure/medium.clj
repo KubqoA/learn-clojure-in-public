@@ -95,3 +95,50 @@
   (test/is (= (f55 [1 1 2 3 2 1 1]) {1 4, 2 2, 3 1}))
   (test/is (= (f55 [:b :a :b :a :b]) {:a 2, :b 3}))
   (test/is (= (f55 '([1 2] [1 3] [1 3])) {[1 2] 1, [1 3] 2})))
+
+;; No. 56
+;; Find Distinct Items
+;; Write a function which removes the duplicates from a sequence. Order of the
+;; items must be maintained.
+;; Restricted: distinct
+
+(def f56)
+
+(test/deftest f56-test
+  (test/are [input output] (= (f56 input) output)
+    [1 2 1 3 1 2 4] [1 2 3 4]
+    [:a :a :b :b :c :c] [:a :b :c]
+    '([2 4] [1 2] [1 3] [1 3]) '([2 4] [1 2] [1 3])
+    (range 50) (range 50)))
+
+;; No. 58
+;; Function Composition
+;; Write a function which allows you to create function compositions. The
+;; parameter list should take a variable number of functions, and create a
+;; function that applies them from right-to-left.
+;; Restricted: comp
+
+;; Simple comp' for only two functions
+(defn comp' [f g] (fn [& args] (f (apply g args))))
+
+(def f58 (fn [& fs] (reduce (fn [f g] #(f (apply g %&))) fs)))
+
+(test/deftest f58-test
+  (test/is (= [3 2 1] ((f58 rest reverse) [1 2 3 4])))
+  (test/is (= 5 ((f58 (partial + 3) second) [1 2 3 4])))
+  (test/is (= true ((f58 zero? #(mod % 8) +) 3 5 7 9)))
+  (test/is (= "HELLO" ((f58 #(.toUpperCase %) #(apply str %) take) 5 "hello world"))))
+ 
+;; No. 59
+;; Juxtaposition
+;; Take a set of functions and return a new function that takes a variable
+;; number of arguments and returns a sequence containing the result of applying
+;; each function left-to-right to the argument list.
+;; Restricted: juxt
+
+(def f59)
+
+(test/deftest f59-test
+  (test/is (= [21 6 1] ((f59 + max min) 2 3 5 1 6 4)))
+  (test/is (= ["HELLO" 5] ((f59 #(.toUpperCase %) count) "hello")))
+  (test/is (= [2 6 4] ((f59 :a :c :b) {:a 2, :b 4, :c 6, :d 8 :e 10}))))

@@ -1,7 +1,7 @@
 # Learning Clojure
 
 ![Clojure for the Brave and True chapter progress](https://img.shields.io/badge/Clojure%20for%20the%20Brave%20and%20True-3%2F13-DBEAFE?logo=clojure&style=for-the-badge&labelColor=4B5563)
-![4Clojure problems progress](https://img.shields.io/badge/4Clojure-55%2F156-DBEAFE?logo=clojure&style=for-the-badge&labelColor=4B5563)
+![4Clojure problems progress](https://img.shields.io/badge/4Clojure-58%2F156-DBEAFE?logo=clojure&style=for-the-badge&labelColor=4B5563)
 ![Advent of Code progress](https://img.shields.io/badge/Advent%20of%20Code-0%2F9-D1D5DB?logo=codefactor&style=for-the-badge&labelColor=4B5563)
 ![Codewars](https://img.shields.io/badge/Codewars%20Clojure%20rank-6%20kyu-DBEAFE?logo=codewars&style=for-the-badge&labelColor=4B5563)
 
@@ -33,12 +33,9 @@
 | John McCarthy's paper          | Reading  |
 | History of Clojure             | -        |
 | Clojure for The Brave and True | 3/13     |
-| 100 4Clojure problems          | 55/100   |
+| 100 4Clojure problems          | 58/100   |
 | Advent of Code tasks           | 0/9      |
 | Codewars rank                  | 6        |
-
-### Details
-
-* [2020-04-21](2021_04_21.md)
+| PurelyFunctional.tv challenges | 3/-      |
 
 ![xkcd: Lisp Cycles](https://imgs.xkcd.com/comics/lisp_cycles.png)
