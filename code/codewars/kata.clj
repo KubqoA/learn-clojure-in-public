@@ -209,3 +209,14 @@
     0 0
     1234 5
     127 7))
+
+;; 
+
+(defn sum_fracts [l]
+  (when-not (empty? l)
+    (let [sum (reduce + (map #(apply / %) l))]
+      (if (ratio? sum) ((juxt numerator denominator) sum) sum))))
+
+(= (sum_fracts [[1, 2], [1, 3], [1, 4]]) [13 12])
+(= (sum_fracts [[1, 3], [5, 3]]) 2)
+(= (sum_fracts []) nil)

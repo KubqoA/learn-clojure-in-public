@@ -30,8 +30,8 @@
 ## Progress summary
 | Goal                           | Progress |
 | ------------------------------ | -------- |
-| John McCarthy's paper          | Reading  |
-| History of Clojure             | -        |
+| John McCarthy's paper          | Read     |
+| History of Clojure             | Reading  |
 | Clojure for The Brave and True | 3/13     |
 | 100 4Clojure problems          | 58/100   |
 | Advent of Code tasks           | 0/9      |
