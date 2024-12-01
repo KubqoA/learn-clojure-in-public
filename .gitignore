@@ -5,3 +5,5 @@
 .cpcache
 .rebel_readline_history
 target/
+.nrepl-port
+.calva
